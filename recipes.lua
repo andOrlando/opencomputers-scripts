@@ -46,7 +46,7 @@ M.walls = {
 M.normalcompactmachine = {
 	catalyst = "Oak Wood Planks",
 	throw = "Ender Pearl",
-	duration = 10,
+	duration = 25,
 	{	{CMW, CMW, CMW},
 		{CMW, CMW, CMW},
 		{CMW, CMW, CMW},
