@@ -34,6 +34,9 @@ there also must be blocks under the field because robots can't place
 things in the air without an upgrade
 ]]
 
+--get length of one second just cuz idk if it's impacted by computer quality
+local ONESEC = os.time(); os.sleep(1); ONESEC = os.time - ONESEC
+
 --dimensions. 3x3x3 = 3, 5x5x5 = 5, etc.
 local DIM = 3
 local middle = math.floor((DIM+1)/2)
@@ -44,7 +47,7 @@ local BELOW = true
 local IN_SIDE = BELOW and sides.down or sides.front
 
 --vacuumulator time
-local VT = 72 * 0.8
+local VT = ONESEC * 0.8
 
 local function move_right() robot.turnRight(); robot.forward(); robot.turnLeft() end
 local function move_left() robot.turnLeft(); robot.forward(); robot.turnRight() end
@@ -141,7 +144,7 @@ local function craft(recipe, inventory)
 				--that massive comment at like line 155. 500 seems to be a magic number so you may
 				--want to refrain from editing this one down like the other one
 				if layer == middle and line == middle - 1 and (block == middle - 1 or middle + 1) then
-					while os.time() - last_drop < last_duration * 72 + VT do os.sleep(0.1) end
+					while os.time() - last_drop < last_duration * ONESEC + VT do os.sleep(0.1) end
 				end
 
 				--move to next block
@@ -167,7 +170,7 @@ local function craft(recipe, inventory)
 
 	--we have to be certain that it's not in the process of shrinking another thing
 	--becuase otherwise the drop won't be registered and it'll get all out of whack
-	while os.time() - last_drop < last_duration * 72 + VT do os.sleep(0.1) end
+	while os.time() - last_drop < last_duration * ONESEC + VT do os.sleep(0.1) end
 	last_drop = os.time()
 	last_duration = recipe.duration
 	robot.drop(1)
