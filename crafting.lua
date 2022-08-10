@@ -158,7 +158,6 @@ local function craft(recipe, inventory)
 	end
 
 	--if the robot's on the wrong side now, reset
-	print(offset, offset % 2)
 	if offset % 2 == 0 then robot.turnLeft(); for _=2,#recipe[#recipe][1] do robot.forward() end; robot.turnRight() end
 
 
