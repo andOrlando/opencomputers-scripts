@@ -6,6 +6,8 @@ local RST = "Redstone"
 local IRB = "Block of Iron"
 local GLD = "Block of Gold"
 local CMW = "Compact Machine Wall"
+local MCS = "Machine Casing"
+local GLM = "Glitched Large Machine"
 
 local function generate_ingredients(tbl)
 	local res = {}
@@ -59,6 +61,24 @@ M.normalcompactmachine = {
 		{CMW, CMW, CMW},
 		{CMW, CMW, CMW},
 	},
+}
+M.giantcompactmachine = {
+	catalyst = "Gold Grit",
+	throw = "Ender Pearl",
+	duration = 50,
+	{	{CMW, CMW, CMW},
+		{CMW, GLM, CMW},
+		{CMW, CMW, CMW},
+	},
+	{	{CMW, GLM, CMW},
+		{GLM, MCS, GLM},
+		{CMW, GLM, CMW},
+	},
+	{	{CMW, CMW, CMW},
+		{CMW, GLM, CMW},
+		{CMW, CMW, CMW},
+	},
+
 }
 
 for _, v in pairs(M) do generate_ingredients(v) end

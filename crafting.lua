@@ -35,7 +35,7 @@ things in the air without an upgrade
 ]]
 
 --get length of one second just cuz idk if it's impacted by computer quality
-local ONESEC = os.time(); os.sleep(1); ONESEC = os.time - ONESEC
+local ONESEC = os.time(); os.sleep(1); ONESEC = os.time() - ONESEC
 
 --dimensions. 3x3x3 = 3, 5x5x5 = 5, etc.
 local DIM = 3
@@ -43,7 +43,7 @@ local middle = math.floor((DIM+1)/2)
 
 --if input chest is below or left
 --false = below true = left
-local BELOW = true
+local BELOW = false
 local IN_SIDE = BELOW and sides.down or sides.front
 
 --vacuumulator time
