@@ -8,6 +8,7 @@ local GLD = "Block of Gold"
 local CMW = "Compact Machine Wall"
 local MCS = "Machine Casing"
 local GLM = "Glitched Large Machine"
+local GGM = "Glitched Giant Machine"
 
 local function generate_ingredients(tbl)
 	local res = {}
@@ -80,6 +81,25 @@ M.giantcompactmachine = {
 	},
 
 }
+M.maximumcompactmachine = {
+	catalyst = "Uranium Grit",
+	throw = "Ender Pearl",
+	duration = 50,
+	{	{CMW, CMW, CMW},
+		{CMW, GGM, CMW},
+		{CMW, CMW, CMW},
+	},
+	{	{CMW, GGM, CMW},
+		{GGM, MCS, GGM},
+		{CMW, GGM, CMW},
+	},
+	{	{CMW, CMW, CMW},
+		{CMW, GGM, CMW},
+		{CMW, CMW, CMW},
+	},
+
+}
+
 
 for _, v in pairs(M) do generate_ingredients(v) end
 return M
