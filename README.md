@@ -1,5 +1,7 @@
 # opencomputers-scripts
 a couple of scripts I used in my playthrough of compact clasutrophobia, a minecraft modpack.
+How to actually install it:
+literally just copy the full script and then run `edit {filename}` (ex. `crafting.lua`) and then hit `insert` or whatever your opencomputers paste is bound to. For crafting.lua make sure you also copy recipes.lua to the same place. To run them just type `lua {file name}`
 
 # treecutter.lua
 plants trees, uses axes, can handle axe breakage when cutting tree, waters tree, does basically anything you could want when cutting trees. Doesn't actually like picking anything up so you gotta have a vacuumulator (or other item collector thing) picking up the drops. My setup is unnecessarily small for kinda literally no reason other than that I think it's cool (4x5x2 footprint if anyone cares) but you don't have to do that. Additionally there's a boolean you can toggle to make it not take axes which can make it even more compact, but is pretty significantly slower.
