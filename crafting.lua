@@ -83,7 +83,7 @@ local function craft(recipe, inventory)
 
 		item = ic.getStackInSlot(IN_SIDE, i)
 
-		--if the itme is nil or not part of the ingredients or we already have all we need, continue
+		--if the item is nil or not part of the ingredients or we already have all we need, continue
 		if not item or not ingredients[item.label] or ingredients[item.label] == 0 then goto continue end
 
 		--figure out how many we need/can take
@@ -136,8 +136,8 @@ local function craft(recipe, inventory)
 			for block=1,#recipe[layer][line] do
 
 				--select and place the correct block based off what direction we're going in
-				robot.select(find_item(recipe[layer][line][math.abs(block - (#recipe[layer][line]+1) * ((line + 1) % 2))]))
-				robot.place()
+				item = recipe[layer][line][math.abs(block - (#recipe[layer][line]+1) * ((line + 1) % 2))]
+				if item then robot.select(find_item(item)); robot.place() end
 
 				--if you're in the middle before it's been five seconds past the last craft, the
 				--robot can get stuck sometimtes. Thus, we wait until it's finished crafting. See
