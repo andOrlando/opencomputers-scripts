@@ -3,7 +3,8 @@ local M = {}
 local OBI = "Obsidian"
 local RSB = "Block of Redstone"
 local RST = "Redstone"
-local IRB = "Block of Iron"
+local END = "Ender Pearl"
+local IRN = "Block of Iron"
 local GLD = "Block of Gold"
 local CMW = "Compact Machine Wall"
 local MCS = "Machine Casing"
@@ -35,40 +36,97 @@ M.enderpearl = {
 	{	{OBI, OBI, OBI},
 		{OBI, OBI, OBI},
 		{OBI, OBI, OBI},
-	},
+	}
 }
+
 M.walls = {
 	catalyst = "Cobblestone",
 	throw = "Redstone",
 	duration = 5,
-	{	{IRB}
+	{	{IRN}
 	},
 	{	{RST}
 	}
 }
-M.normalcompactmachine = {
-	catalyst = "Oak Wood Planks",
+
+M.normalmachine = {
+	catalyst = "Lead Grit",
+	throw = "Ender Pearl",
+	duration = 22,
+	{	{CMW, CMW, CMW},
+		{CMW, CMW, CMW},
+		{CMW, CMW, CMW},
+	},
+	{	{CMW, CMW, CMW},
+		{CMW, IRN, CMW},
+		{CMW, CMW, CMW},
+	},
+	{	{CMW, CMW, CMW},
+		{CMW, CMW, CMW},
+		{CMW, CMW, CMW},
+	}
+}
+
+M.smallmachine = {
+	catalyst = "Uranium Grit",
 	throw = "Ender Pearl",
 	duration = 25,
 	{	{CMW, CMW, CMW},
 		{CMW, CMW, CMW},
-		{CMW, CMW, CMW},
+		{CMW, CMW, CMW}
 	},
 	{	{CMW, CMW, CMW},
 		{CMW, GLD, CMW},
-		{CMW, CMW, CMW},
+		{CMW, CMW, CMW}
 	},
 	{	{CMW, CMW, CMW},
 		{CMW, CMW, CMW},
-		{CMW, CMW, CMW},
-	},
+		{CMW, CMW, CMW}
+	}
 }
-M.giantcompactmachine = {
-	catalyst = "Gold Grit",
+
+M.largemachine = {
+	catalyst = "Copper Grit",
 	throw = "Ender Pearl",
-	duration = 50,
-	{	{CMW, CMW, CMW},
-		{CMW, GLM, CMW},
+	duration = 27,
+	{	{CMW, CMW, CMW, CMW, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
+	},
+	{	{CMW, CMW, CMW, CMW, CMW},
+		{CMW, nil, nil, nil, CMW},
+		{CMW, nil, nil, nil, CMW},
+		{CMW, nil, nil, nil, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
+	},
+	{	{CMW, CMW, CMW, CMW, CMW},
+		{CMW, nil, nil, nil, CMW},
+		{CMW, nil, nil, nil, CMW},
+		{CMW, nil, nil, nil, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
+	},
+	{	{CMW, CMW, CMW, CMW, CMW},
+		{CMW, nil, nil, nil, CMW},
+		{CMW, nil, nil, nil, CMW},
+		{CMW, nil, nil, nil, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
+	},
+	{	{CMW, CMW, CMW, CMW, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
+	}
+}
+
+M.giantmachine = {
+	catalyst = "Nickel Grit",
+	throw = "Ender Pearl",
+	duration = 28,
+	{	{CMW, GLM, CMW},
+		{CMW, CMW, CMW},
 		{CMW, CMW, CMW},
 	},
 	{	{CMW, GLM, CMW},
@@ -78,28 +136,44 @@ M.giantcompactmachine = {
 	{	{CMW, CMW, CMW},
 		{CMW, GLM, CMW},
 		{CMW, CMW, CMW},
-	},
-
+	}
 }
-M.maximumcompactmachine = {
-	catalyst = "Uranium Grit",
+
+M.maxmachine = {
+	catalyst = "Silver Grit",
 	throw = "Ender Pearl",
-	duration = 50,
-	{	{CMW, CMW, CMW},
-		{CMW, GGM, CMW},
-		{CMW, CMW, CMW},
+	duration = 30,
+	{	{CMW, CMW, CMW, CMW, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
 	},
-	{	{CMW, GGM, CMW},
-		{GGM, MCS, GGM},
-		{CMW, GGM, CMW},
+	{	{CMW, CMW, CMW, CMW, CMW},
+		{CMW, nil, nil, nil, CMW},
+		{CMW, nil, nil, nil, CMW},
+		{CMW, nil, nil, nil, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
 	},
-	{	{CMW, CMW, CMW},
-		{CMW, GGM, CMW},
-		{CMW, CMW, CMW},
+	{	{CMW, CMW, CMW, CMW, CMW},
+		{CMW, nil, nil, nil, CMW},
+		{CMW, nil, GGM, nil, CMW},
+		{CMW, nil, nil, nil, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
 	},
-
+	{	{CMW, CMW, CMW, CMW, CMW},
+		{CMW, nil, nil, nil, CMW},
+		{CMW, nil, nil, nil, CMW},
+		{CMW, nil, nil, nil, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
+	},
+	{	{CMW, CMW, CMW, CMW, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
+	}
 }
-
 
 for _, v in pairs(M) do generate_ingredients(v) end
 return M
