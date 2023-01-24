@@ -1,10 +1,8 @@
-local os = require "os"
-local robot = require "robot"
-local sides = require "sides"
-local component = require "component"
-local ic = component.inventory_controller
-
-local recipes = require "recipes"
+ocal DIM = 3
+local BELOW = false
+--DIM is the dimension of the craft. 3x3x3 = 3, 5x5x5 = 5, etc.
+--BELOW is if input chest is below or left
+--these are the only two things you need to edit
 
 --[[ physical setup
 uhhh chest to left for catalyst return, chest below for actual item import
@@ -34,16 +32,19 @@ there also must be blocks under the field because robots can't place
 things in the air without an upgrade
 ]]
 
+local os = require "os"
+local robot = require "robot"
+local sides = require "sides"
+local component = require "component"
+local ic = component.inventory_controller
+
+local recipes = require "recipes"
+
 --get length of one second just cuz idk if it's impacted by computer quality
 local ONESEC = os.time(); os.sleep(1); ONESEC = os.time() - ONESEC
 
---dimensions. 3x3x3 = 3, 5x5x5 = 5, etc.
-local DIM = 3
 local middle = math.floor((DIM+1)/2)
 
---if input chest is below or left
---false = below true = left
-local BELOW = false
 local IN_SIDE = BELOW and sides.down or sides.front
 
 --vacuumulator time
@@ -71,6 +72,7 @@ end
 
 local last_drop = 0
 local last_duration = 0
+local function wait_for_craft() while (os.time() - last_drop) * 1.05 < last_duration * ONESEC + VT do os.sleep(0.1) end end
 local function craft(recipe, inventory)
 	--if we can craft a recipe we know we have enough stuff in the inventory to our left
 	--take all requisite items from inventory to left
@@ -135,6 +137,10 @@ local function craft(recipe, inventory)
 			--place each individual block
 			for block=1,#recipe[layer][line] do
 
+				--for placing, we check if layer = middle-1, line = middle and block = middle
+				print(("%s %s %s %s %s %s"):format(layer, middle, DIM-#recipe[layer]+line, middle, math.abs(block - (#recipe[layer][line]+1) * ((line + 1) % 2)), middle))
+				if layer == middle and DIM-#recipe[layer]+line == middle and math.abs(block - (#recipe[layer][line]+1) * ((line + 1) % 2)) == middle then wait_for_craft() end
+
 				--select and place the correct block based off what direction we're going in
 				item = recipe[layer][line][math.abs(block - (#recipe[layer][line]+1) * ((line + 1) % 2))]
 				if item then robot.select(find_item(item)); robot.place() end
@@ -143,9 +149,9 @@ local function craft(recipe, inventory)
 				--robot can get stuck sometimtes. Thus, we wait until it's finished crafting. See
 				--that massive comment at like line 155. 500 seems to be a magic number so you may
 				--want to refrain from editing this one down like the other one
-				if layer == middle and line == middle - 1 and (block == middle - 1 or middle + 1) then
-					while os.time() - last_drop < last_duration * ONESEC + VT do os.sleep(0.1) end
-				end
+				if layer == middle and line == middle - 1 and (block == middle - 1 or middle + 1) then wait_for_craft() end
+
+				--for moving, we check if layer = middle, line = middle -1 and its on either side of block
 
 				--move to next block
 				if block ~= #recipe[layer][line] then if offset % 2 == 1 then move_right() else move_left() end end

@@ -3,9 +3,9 @@ local M = {}
 local OBI = "Obsidian"
 local RSB = "Block of Redstone"
 local RST = "Redstone"
-local END = "Ender Pearl"
 local IRN = "Block of Iron"
 local GLD = "Block of Gold"
+local DIA = "Block of Diamond"
 local CMW = "Compact Machine Wall"
 local MCS = "Machine Casing"
 local GLM = "Glitched Large Machine"
@@ -14,7 +14,9 @@ local GGM = "Glitched Giant Machine"
 local function generate_ingredients(tbl)
 	local res = {}
 	for i=1,#tbl do for j=1,#tbl[i] do for k=1,#tbl[i][j] do
+		if not tbl[i][j][k] then goto continue end
 		res[tbl[i][j][k]] = (res[tbl[i][j][k]] or 0) + 1
+		::continue::
 	end end end
 	res[tbl.throw] = (res[tbl.throw] or 0) + 1
 	res[tbl.catalyst] = (res[tbl.catalyst] or 0) + 1
@@ -49,7 +51,7 @@ M.walls = {
 	}
 }
 
-M.normalmachine = {
+M.smallmachine = {
 	catalyst = "Lead Grit",
 	throw = "Ender Pearl",
 	duration = 22,
@@ -67,7 +69,7 @@ M.normalmachine = {
 	}
 }
 
-M.smallmachine = {
+M.normalmachine = {
 	catalyst = "Uranium Grit",
 	throw = "Ender Pearl",
 	duration = 25,
@@ -124,9 +126,9 @@ M.largemachine = {
 M.giantmachine = {
 	catalyst = "Nickel Grit",
 	throw = "Ender Pearl",
-	duration = 28,
-	{	{CMW, GLM, CMW},
-		{CMW, CMW, CMW},
+	duration = 50,
+	{	{CMW, CMW, CMW},
+		{CMW, GLM, CMW},
 		{CMW, CMW, CMW},
 	},
 	{	{CMW, GLM, CMW},
@@ -136,6 +138,42 @@ M.giantmachine = {
 	{	{CMW, CMW, CMW},
 		{CMW, GLM, CMW},
 		{CMW, CMW, CMW},
+	}
+}
+
+M.giantmachine2 = {
+	catalyst = "Aluminum Grit",
+	throw = "Ender Pearl",
+	duration = 27,
+	{	{CMW, CMW, CMW, CMW, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
+	},
+	{	{CMW, CMW, CMW, CMW, CMW},
+		{CMW, nil, nil, nil, CMW},
+		{CMW, nil, nil, nil, CMW},
+		{CMW, nil, nil, nil, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
+	},
+	{	{CMW, CMW, CMW, CMW, CMW},
+		{CMW, nil, nil, nil, CMW},
+		{CMW, nil, DIA, nil, CMW},
+		{CMW, nil, nil, nil, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
+	},
+	{	{CMW, CMW, CMW, CMW, CMW},
+		{CMW, nil, nil, nil, CMW},
+		{CMW, nil, nil, nil, CMW},
+		{CMW, nil, nil, nil, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
+	},
+	{	{CMW, CMW, CMW, CMW, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
+		{CMW, CMW, CMW, CMW, CMW},
 	}
 }
 
