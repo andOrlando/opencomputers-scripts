@@ -11,18 +11,6 @@ local MCS = "Machine Casing"
 local GLM = "Glitched Large Machine"
 local GGM = "Glitched Giant Machine"
 
-local function generate_ingredients(tbl)
-	local res = {}
-	for i=1,#tbl do for j=1,#tbl[i] do for k=1,#tbl[i][j] do
-		if not tbl[i][j][k] then goto continue end
-		res[tbl[i][j][k]] = (res[tbl[i][j][k]] or 0) + 1
-		::continue::
-	end end end
-	res[tbl.throw] = (res[tbl.throw] or 0) + 1
-	res[tbl.catalyst] = (res[tbl.catalyst] or 0) + 1
-	tbl.ingredients = res
-end
-
 M.enderpearl = {
 	catalyst = "Iron Grit",
 	throw = "Redstone",
@@ -212,6 +200,19 @@ M.maxmachine = {
 		{CMW, CMW, CMW, CMW, CMW},
 	}
 }
+
+
+local function generate_ingredients(tbl)
+	local res = {}
+	for i=1,#tbl do for j=1,#tbl[i] do for k=1,#tbl[i][j] do
+		if not tbl[i][j][k] then goto continue end
+		res[tbl[i][j][k]] = (res[tbl[i][j][k]] or 0) + 1
+		::continue::
+	end end end
+	res[tbl.throw] = (res[tbl.throw] or 0) + 1
+	res[tbl.catalyst] = (res[tbl.catalyst] or 0) + 1
+	tbl.ingredients = res
+end
 
 for _, v in pairs(M) do generate_ingredients(v) end
 return M

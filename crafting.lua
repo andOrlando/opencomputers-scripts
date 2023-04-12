@@ -1,4 +1,4 @@
-ocal DIM = 3
+local DIM = 3
 local BELOW = false
 --DIM is the dimension of the craft. 3x3x3 = 3, 5x5x5 = 5, etc.
 --BELOW is if input chest is below or left
